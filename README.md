@@ -1,58 +1,80 @@
-## Get Started
+# DATASCI 209 flask template
 
-This guide describes how to use DigitalOcean App Platform to run a sample Flask application.
+This repo provides a basic flask app for DATASCI 209 students and instructors. You can run this flask app locally for development/debugging or deploy it to [Vercel](https://vercel.com).
 
-**Note**: Following these steps may result in charges for the use of DigitalOcean services.
+*Note there is a size limitatinon of 250MB*, this means you have the careful with which POython libraries you include alongside `Flask` (e.g., `sklearn` is too big).
 
-### Requirements
+## Getting Started
 
-* You need a DigitalOcean account. If you do not already have one, first [sign up](https://cloud.digitalocean.com/registrations/new).
+1. Install Python 3.x on your computer.
+2. [Create a copy](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template#creating-a-repository-from-a-template) of this repo in your personal GitHub workspace. For example, if your GitHub username is **octocat**, you would make octocat the owner of your copy of the repository.
+3. Clone your copy of this repo from GitHub to your computer.
 
-## Deploy the App
+## Local Development
 
-Click the following button to deploy the app to App Platform. If you are not currently logged in with your DigitalOcean account, this button prompts you to to log in.
+**Install dependencies**
 
-[![Deploy to DigitalOcean](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/digitalocean/sample-flask/tree/main)
+Open a terminal and navigate to the folder that contains your local copy of this repo.  Run the following command to install the necessary Python libraries:
 
-Note that, for the purposes of this tutorial, this button deploys the app directly from DigitalOcean's GitHub repository, which disables automatic redeployment since you cannot change our template. If you want automatic redeployment or you want to change the sample app's code to your own, we instead recommend you fork [our repository](https://github.com/digitalocean/sample-flask/tree/main).
+**Mac**
+```
+pip3 install -r requirements.txt
+```
 
-To fork our repository, click the **Fork** button in the top-right of [its page on GitHub](https://github.com/digitalocean/sample-flask/tree/main), then follow the on-screen instructions. To learn more about forking repos, see the [GitHub documentation](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo).
+**Windows**
+```
+py -m pip install -r requirements.txt
+```
 
-After forking the repo, you can view the same README in your own GitHub org; for example, in `https://github.com/<your-org>/sample-flask`. To deploy the new repo, visit the [control panel](https://cloud.digitalocean.com/apps) and click the **Create App** button. This takes you to the app creation page. Under **Service Provider**, select **GitHub**. Then, under **Repository**, select your newly-forked repo. Ensure that your branch is set to **main** and **Autodeploy** is checked on. Finally, click **Next**.
+See the [pip documentation](https://pip.pypa.io/en/stable/cli/pip_install/) if you need more information about installing Python libraries with pip.
 
-After clicking the **Deploy to DigitalOcean** button or completing the instructions above to fork the repo, follow these steps:
+**Run your app locally**
 
-1. Configure the app, such as by specifying HTTP routes, declaring environment variables, or adding a database. For the purposes of this tutorial, this step is optional.
-1. Provide a name for your app and select the region to deploy your app to, then click **Next**. By default, App Platform selects the region closest to you. Unless your app needs to interface with external services, your chosen region does not affect the app's performance, since to all App Platform apps are routed through a global CDN.
-1. On the following screen, leave all the fields as they are and click **Next**.
-1. Confirm your plan settings and how many containers you want to launch and click **Launch Basic/Pro App**.
+In the folder where you cloned a copy of this repo, run the following command.  The --debug option will cause flask to automatically load any code changes you make.
 
-After, you should see a "Building..." progress indicator. You can click **View Logs** to see more details of the build. It can take a few minutes for the build to finish, but you can follow the progress in the **Deployments** tab.
+```
+flask --app app.py --debug run
+```
 
-Once the build completes successfully, click the **Live App** link in the header and you should see your running application in a new tab, displaying the home page.
+**Point your browser to http://127.0.0.1:5000**
 
+When running your app locally with the --debug flag, flask's built-in debugger will provide an interactive traceback in your browser.  You can also use an external debugger such as the one in your preferred IDE to troubleshoot your code.  See the flask [Debugging Application Errors](https://flask.palletsprojects.com/en/stable/debugging/) documentation for more information on debugging your flask app.
 
-## Make Changes to Your App
+## Hosting your flask app on Vercel
 
-If you forked our repo, you can now make changes to your copy of the sample app. Pushing a new change to the forked repo automatically redeploys the app to App Platform with zero downtime.
+Vercel provides a cloud platform that you can use to host your flask app for free (with generous limits on the hobby tier).
 
-Here's an example code change you can make for this app:
+**How to deploy your flask app to Vercel**
 
-1. Edit `templates/index.html` and replace "Welcome to your new Flask App!" with a different greeting
-1. Commit the change to the `main` branch. Normally it's a better practice to create a new branch for your change and then merge that branch to `main` after review, but for this demo you can commit to the `main` branch directly.
-1. Visit the [control panel](https://cloud.digitalocean.com/apps) and navigate to your sample app.
-1. You should see a "Building..." progress indicator, just like when you first created the app.
-1. Once the build completes successfully, click the **Live App** link in the header and you should see your updated application running. You may need to force refresh the page in your browser (e.g. using **Shift** + **Reload**).
+1. Create a [Vercel](https://vercel.com) account. You can sign up with your GitHub account for easy integration.
 
-## Learn More
+2. From the Vercel dashboard, click **Add New...** → **Project**.
 
-To learn more about App Platform and how to manage and update your application, see [our App Platform documentation](https://www.digitalocean.com/docs/app-platform/).
+3. Select **Import Git Repository** and choose your fork of this flask template repository.
+   - If you don't see your repository, click **Adjust GitHub App Permissions** to grant Vercel access to the repo.
 
-## Delete the App
+4. Vercel will automatically detect the project settings from the `vercel.json` file. You don't need to change any settings.
 
-When you no longer need this sample application running live, you can delete it by following these steps:
-1. Visit the [Apps control panel](https://cloud.digitalocean.com/apps).
-2. Navigate to the sample app.
-3. In the **Settings** tab, click **Destroy**.
+5. Click **Deploy**. Vercel will build and deploy your application.
 
-**Note**: If you do not delete your app, charges for using DigitalOcean services will continue to accrue.
+6. Once deployment completes, Vercel will provide you with a URL for your app (e.g., `https://your-project-name.vercel.app`).
+
+**Automatic Deployments**
+
+Every time you push changes to the main branch of your GitHub repository, Vercel will automatically rebuild and deploy your app. You can also create preview deployments by pushing to other branches or creating pull requests.
+
+**Custom Domains**
+
+You can add a custom domain to your Vercel project from the project settings. See Vercel's [Custom Domains documentation](https://vercel.com/docs/concepts/projects/domains) for more information.
+
+**Troubleshooting**
+
+- Check the **Deployments** tab in your Vercel project dashboard to view build logs and identify any errors.
+- See Vercel's [Python documentation](https://vercel.com/docs/functions/runtimes/python) for more details on Python runtime support.
+- Visit Vercel's [Support page](https://vercel.com/support) if you need additional help.
+
+**Important Notes**
+
+- Vercel's free hobby tier includes generous limits for personal projects and learning.
+- The `vercel.json` file in this repo configures the Python runtime and routing for Flask.
+- Static files in the `static/` folder are served automatically.

@@ -1,4 +1,4 @@
-# DATASCI 209 flask template
+# DATASCI 209 flask US Map Example
 
 This repo provides a basic flask app for DATASCI 209 students and instructors. You can run this flask app locally for development/debugging or deploy it to [Vercel](https://vercel.com).
 
